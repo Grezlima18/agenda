@@ -13,7 +13,7 @@ Bem-vindo ao projeto de uma agenda em Laravel! Siga as instruções abaixo para 
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-projeto.git
+   git clone https://github.com/Grezlima18/agenda.git
 
 2. **Navegue até o diretório do projeto:**
 
