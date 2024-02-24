@@ -1,4 +1,4 @@
-# Seu Projeto Laravel
+# Agenda
 
 Bem-vindo ao projeto de uma agenda em Laravel! Siga as instruções abaixo para configurar o ambiente de desenvolvimento.
 
@@ -56,5 +56,5 @@ Após a configuração, inicie o servidor de desenvolvimento:
    ```bash
     php artisan serve
 
-O projeto estará disponível em http://localhost:8000 no seu navegador.
-Certifique-se de substituir "seu-usuario" e "seu-projeto" pelos valores reais do seu repositório.
+## O projeto estará disponível em http://localhost:8000 no seu navegador.
+## Certifique-se de substituir "seu-usuario" e "seu-projeto" pelos valores reais do seu repositório.
