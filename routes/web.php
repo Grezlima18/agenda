@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::fallback(function () {
+    // Redireciona para o index da rota 'agenda'
+    return redirect()->route('agenda.index');
+});
 
-Route::resource('/', AgendaController::class);
+Route::resource('agenda', AgendaController::class);
 
 // Route::get('/', function () {
 //     return view('teste');

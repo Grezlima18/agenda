@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pessoa;
 use Illuminate\Http\Request;
 
 class AgendaController extends Controller
@@ -13,7 +14,8 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        return view('teste');
+        $cadastros = Pessoa::all();
+        return view('agenda.index', compact('cadastros'));
     }
 
     /**
@@ -23,7 +25,16 @@ class AgendaController extends Controller
      */
     public function create()
     {
-        return view('agenda.criar');
+        $categorias = [
+            1 => "Aluno",
+            2 => "Responsável",
+            3 => "Professor",
+            4 => "Funcionário",
+            5 => "Coordenador"
+        ];
+
+        return view('agenda.create')
+            ->with('categorias', $categorias);
     }
 
     /**
@@ -34,18 +45,17 @@ class AgendaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nome' => 'required',
+            'telefone' => 'nullable',
+            'cidadeEstado' => 'nullable',
+            'email' => 'nullable|email',
+            'categoria' => 'nullable',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        Pessoa::create($request->all());
+
+        return redirect()->route('agenda.index')->with('success', 'Pessoa cadastrada com sucesso!');
     }
 
     /**
@@ -56,7 +66,18 @@ class AgendaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cadastro = Pessoa::findOrFail($id);
+        $categorias = [
+            1 => "Aluno",
+            2 => "Responsável",
+            3 => "Professor",
+            4 => "Funcionário",
+            5 => "Coordenador"
+        ];
+
+        return view('agenda.edit')
+            ->with('cadastro', $cadastro)
+            ->with('categorias', $categorias);
     }
 
     /**
@@ -68,7 +89,21 @@ class AgendaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validação dos dados, por exemplo:
+        $request->validate([
+            'nome' => 'required',
+            'telefone' => 'nullable',
+            'cidadeEstado' => 'nullable',
+            'email' => 'nullable|email',
+            'categoria' => 'nullable',
+        ]);
+
+        // Encontrar a pessoa pelo ID e atualizar os dados
+        $pessoa = Pessoa::findOrFail($id);
+        $pessoa->update($request->all());
+
+        // Redirecionar para a página de listagem com uma mensagem de sucesso
+        return redirect()->route('agenda.index')->with('success', 'Cadastro atualizado com sucesso!');
     }
 
     /**
@@ -79,6 +114,9 @@ class AgendaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pessoa = Pessoa::findOrFail($id);
+        $pessoa->delete();
+
+        return redirect()->route('agenda.index')->with('success', 'Cadastro excluído com sucesso!');
     }
 }
