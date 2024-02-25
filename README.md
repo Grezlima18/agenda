@@ -18,7 +18,7 @@ Bem-vindo ao projeto de uma agenda em Laravel! Siga as instruções abaixo para 
 2. **Navegue até o diretório do projeto:**
 
    ```bash
-   cd seu-projeto
+   cd agenda
 
 3. **Copie o arquivo .env.example para .env:**
 
